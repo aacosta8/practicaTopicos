@@ -1,4 +1,4 @@
-
+#coding=utf-8
 from __future__ import print_function
 
 # expresiones regulares
@@ -44,8 +44,8 @@ if __name__ == "__main__":
 
     # Agregamos a cada grupo, los documentos que pertenecen a él.
     for i,cluster in enumerate(clusters):
-        k_groups[cluster]+= re.findall('\/\w*$', documents_names[i])
-
+        # k_groups[cluster]+= re.findall('\/\w*$', documents_names[i])
+        k_groups[cluster].append(documents_names[i])
     for j in range(k):
         print("---------------------------------------------------------------")
         print("Cluster ",j)
@@ -53,5 +53,5 @@ if __name__ == "__main__":
         print(k_groups[j])
         print("---------------------------------------------------------------")
     salida = sc.parallelize(k_groups)
-    salida.saveAsTextFile("hdfs:///user/jarangol/kmeans1")
+    salida.saveAsTextFile("hdfs:///user/jarangol/kmeans/kmeans2")
     sc.stop()
