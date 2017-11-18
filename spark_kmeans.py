@@ -1,3 +1,4 @@
+
 from __future__ import print_function
 
 # expresiones regulares
@@ -18,7 +19,7 @@ if __name__ == "__main__":
     sc = SparkContext(appName="Alexander_Julian")  # SparkContext
 
     # lista de todos los documentos, (Key = name, value= document content)
-    documents = sc.wholeTextFiles("hdfs://.")
+    documents = sc.wholeTextFiles("hdfs:///user/jarangol/datasets/50")
     # Lista de solo los names de los documents
     documents_names = documents.keys().collect()
     # Lista de listas con el contenido de los documentos
@@ -45,12 +46,12 @@ if __name__ == "__main__":
     for i,cluster in enumerate(clusters):
         k_groups[cluster]+= re.findall('\/\w*$', documents_names[i])
 
-    for j in ranke(k):
-        print "---------------------------------------------------------------
-        print "Cluster ",j
-        print "---------------------------------------------------------------
-        print k_groups[j]
-        print "---------------------------------------------------------------"
-    salida = sc.parellelize()
+    for j in range(k):
+        print("---------------------------------------------------------------")
+        print("Cluster ",j)
+        print("---------------------------------------------------------------")
+        print(k_groups[j])
+        print("---------------------------------------------------------------")
+    salida = sc.parallelize(k_groups)
     salida.saveAsTextFile("hdfs:///user/jarangol/kmeans1")
     sc.stop()
