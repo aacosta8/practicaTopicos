@@ -13,7 +13,7 @@ Integrantes del grupo:
 
  Para ejecutar localmente se debe correr el siguiente comando:
 
-    ```spark-submit spark_kmeans.py```
+  ```spark-submit spark_kmeans.py```
 
  Y para ejecutarlo en el cluster el siguiente comando:
 
